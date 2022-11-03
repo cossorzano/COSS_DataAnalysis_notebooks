@@ -49,52 +49,43 @@ class softmax:
         return exps / np.sum(exps, axis=1).reshape(-1, 1)
 
 class Initialization:
-
+    
     @staticmethod
-    def Zeros(input_channel, output_channel):
-        w = np.zeros((input_channel, output_channel))
+    def Common(input_channel, output_channel):
         sdw = np.zeros((input_channel, output_channel))
         vdw = np.zeros((input_channel, output_channel))
 
         b = np.zeros((1, output_channel))
         sdb = np.zeros((1, output_channel))
         vdb = np.zeros((1, output_channel))
+
+        return b, sdw, sdb, vdw, vdb
+        
+    @staticmethod
+    def Zeros(input_channel, output_channel):
+        w = np.zeros((input_channel, output_channel))
+        b, sdw, sdb, vdw, vdb = Initialization.Common(input_channel, output_channel)
 
         return w, b, sdw, sdb, vdw, vdb
 
     @staticmethod
     def Xavier(input_channel, output_channel):
         w = np.random.randn(input_channel, output_channel) * np.sqrt(1 / input_channel)
-        sdw = np.zeros((input_channel, output_channel))
-        vdw = np.zeros((input_channel, output_channel))
-
-        b = np.zeros((1, output_channel))
-        sdb = np.zeros((1, output_channel))
-        vdb = np.zeros((1, output_channel))
+        b, sdw, sdb, vdw, vdb = Initialization.Common(input_channel, output_channel)
 
         return w, b, sdw, sdb, vdw, vdb
 
     @staticmethod
     def He(input_channel, output_channel):
         w = np.random.randn(input_channel, output_channel) * np.sqrt(2 / input_channel)
-        sdw = np.zeros((input_channel, output_channel))
-        vdw = np.zeros((input_channel, output_channel))
-
-        b = np.zeros((1, output_channel))
-        sdb = np.zeros((1, output_channel))
-        vdb = np.zeros((1, output_channel))
+        b, sdw, sdb, vdw, vdb = Initialization.Common(input_channel, output_channel)
 
         return w, b, sdw, sdb, vdw, vdb
 
     @staticmethod
     def Kumar(input_channel, output_channel):
         w = np.random.randn(input_channel, output_channel) * np.sqrt(12.96 / input_channel)
-        sdw = np.zeros((input_channel, output_channel))
-        vdw = np.zeros((input_channel, output_channel))
-
-        b = np.zeros((1, output_channel))
-        sdb = np.zeros((1, output_channel))
-        vdb = np.zeros((1, output_channel))
+        b, sdw, sdb, vdw, vdb = Initialization.Common(input_channel, output_channel)
 
         return w, b, sdw, sdb, vdw, vdb
 
